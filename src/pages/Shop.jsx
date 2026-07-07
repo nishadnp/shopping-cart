@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { fetchStoreProducts } from "../services/storeApi";
+import ProductCard from "../components/ProductCard";
 
 export default function Shop() {
 
@@ -39,18 +40,12 @@ export default function Shop() {
         <div>
             <h2>Our Products</h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '1.5rem', marginTop: '1rem' }}>
-                {products.map((product) => (
-                <div 
+                {products.map(product => (
+                    <ProductCard 
                     key={product.id} 
-                    style={{ border: '1px solid #ddd', padding: '1rem', borderRadius: '8px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
-                >
-                    <div>
-                    <img src={product.image} alt={product.title} style={{ width: '100%', height: '150px', objectFit: 'contain', marginBottom: '0.5rem' }} />
-                    <h3 style={{ fontSize: '1rem', margin: '0.5rem 0' }}>{product.title}</h3>
-                    <p style={{ fontWeight: 'bold' }}>${product.price.toFixed(2)}</p>
-                    </div>
-                    <button style={{ marginTop: '1rem', padding: '0.5rem', cursor: 'pointer' }}>View Item</button>
-                </div>
+                    product={product}
+                    onAddToCart={(prod, qty) => console.log('Added:', prod.title, 'Qty:', qty)}
+                    />
                 ))}
             </div>
         </div>

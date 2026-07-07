@@ -1,10 +1,19 @@
+import { Link, Outlet } from 'react-router-dom'
 import './App.css'
+
 
 function App() {
 
   return (
     <>
-      <h1>Hello, Shopping Cart!</h1>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/shop">Shop</Link>
+        <Link to="/cart">Cart (0)</Link>
+      </nav>
+      <main>
+        <Outlet />
+      </main>
     </>
   )
 }

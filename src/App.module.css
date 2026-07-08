@@ -56,3 +56,54 @@
   margin: 2rem auto;
   padding: 0 2rem;
 }
+
+.appLayout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Forces layout to span full screen height */
+}
+
+.mainContent {
+  flex: 1; /* Pushes the footer down if page content is short */
+  max-width: 1200px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.footer {
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--border-color);
+  padding: 2rem 0;
+  margin-top: auto; /* Safety pin to bottom */
+}
+
+.footerContainer {
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footerText {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footerLink {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.15s ease;
+}
+
+.footerLink:hover {
+  color: var(--primary);
+}

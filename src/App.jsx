@@ -1,6 +1,6 @@
 import { Link, Outlet } from 'react-router-dom';
 import { useState } from 'react';
-import styles from './App.module.css'; // 1. Import your scoped module styles
+import styles from './App.module.css';
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -8,7 +8,6 @@ function App() {
   const handleAddToCart = (product, quantity) => {
     setCart(prevCart => {
       const existingItemIndex = prevCart.findIndex(item => item.id === product.id);
-
       if (existingItemIndex > -1) {
         const newCart = [...prevCart];
         newCart[existingItemIndex].quantity += quantity;
@@ -26,8 +25,7 @@ function App() {
       return;
     }
     setCart(prevCart => 
-      prevCart.map(item => 
-        item.id === productId ? {...item, quantity: newQuantity} : item)
+      prevCart.map(item => item.id === productId ? {...item, quantity: newQuantity} : item)
     );
   };
 
@@ -36,15 +34,14 @@ function App() {
   };
 
   return (
-    <>
-      {/* 2. Wrap your navigation inside a structured header tag and use modules */}
+    // 1. Wrap entire tree inside an appLayout wrapper to handle the sticky calculations
+    <div className={styles.appLayout}>
       <header className={styles.header}>
         <nav className={styles.navContainer}>
           <Link to="/" className={styles.logo}>SwiftStore</Link>
           <div className={styles.navLinks}>
             <Link className={styles.link} to="/">Home</Link>
             <Link className={styles.link} to="/shop">Shop</Link>
-            {/* Template literals make combining multiple scoped classes clean */}
             <Link className={`${styles.link} ${styles.cartLink}`} to="/cart">
               Cart ({totalItems})
             </Link>
@@ -55,7 +52,21 @@ function App() {
       <main className={styles.mainContent}>
         <Outlet context={{cart, handleAddToCart, handleUpdateQuantity, handleRemoveFromCart}} />
       </main>
-    </>
+
+      
+      <footer className={styles.footer}>
+        <div className={styles.footerContainer}>
+          <p className={styles.footerText}>
+            © {new Date().getFullYear()} SwiftStore Inc. All rights reserved. Built for engineering evaluation.
+          </p>
+          <div className={styles.footerLinks}>
+            <a href="https://github.com/nishadnp" target="_blank" rel="noreferrer" className={styles.footerLink}>GitHub</a>
+            <Link to="/shop" className={styles.footerLink}>Privacy Policy</Link>
+            <Link to="/shop" className={styles.footerLink}>Terms of Service</Link>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 }
 

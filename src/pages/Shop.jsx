@@ -3,12 +3,15 @@
 import { useEffect, useState } from "react";
 import { fetchStoreProducts } from "../services/storeApi";
 import ProductCard from "../components/ProductCard";
+import { useOutletContext } from "react-router-dom";
 
 export default function Shop() {
 
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const { handleAddToCart } = useOutletContext();
 
     useEffect(() => {
         const controller = new AbortController();
@@ -29,6 +32,7 @@ export default function Shop() {
 
         getProducts();
 
+
         return () => controller.abort();
     }, []);
 
@@ -44,7 +48,7 @@ export default function Shop() {
                     <ProductCard 
                     key={product.id} 
                     product={product}
-                    onAddToCart={(prod, qty) => console.log('Added:', prod.title, 'Qty:', qty)}
+                    onAddToCart={handleAddToCart}
                     />
                 ))}
             </div>

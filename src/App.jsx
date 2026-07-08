@@ -20,7 +20,24 @@ function App() {
     });
   };
 
-  const totalItems = cart.reduce((total, item) => total + item.quantity, 0)
+  const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+
+  const handleUpdateQuantity = (productId, newQuantity) => {
+    if (newQuantity < 1) {
+      handleRemoveFromCart(productId);
+      return;
+    }
+    setCart(prevCart => 
+    prevCart.map(item => 
+      item.id === productId ? {...item, quantity: newQuantity} : item)
+    );
+  };
+
+  const handleRemoveFromCart = productId => {
+    setCart(prevCart => prevCart.filter(item => item.id !== productId));
+  };
+
+  
   
   return (
     <>
@@ -30,7 +47,7 @@ function App() {
         <Link to="/cart">Cart ({totalItems})</Link>
       </nav>
       <main>
-        <Outlet context={{cart, handleAddToCart}} />
+        <Outlet context={{cart, handleAddToCart, handleUpdateQuantity, handleRemoveFromCart}} />
       </main>
     </>
   )

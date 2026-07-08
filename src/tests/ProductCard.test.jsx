@@ -22,7 +22,7 @@ describe('ProductCard Component', () => {
     const user = userEvent.setup();
     render(<ProductCard product={mockProduct} onAddToCart={vi.fn()} />);
     
-    const input = screen.getByRole('spinbutton'); // numeric inputs are spinbuttons
+    const input = screen.getByRole('spinbutton');
     const incrementBtn = screen.getByRole('button', { name: /increase quantity/i });
     
     expect(input.value).toBe('1');
@@ -32,18 +32,16 @@ describe('ProductCard Component', () => {
 
   it('calls onAddToCart with the correct product and quantity', async () => {
     const user = userEvent.setup();
-    const mockAddToCart = vi.fn(); // Creates a fake placeholder spy function
+    const mockAddToCart = vi.fn();
     
     render(<ProductCard product={mockProduct} onAddToCart={mockAddToCart} />);
     
     const incrementBtn = screen.getByRole('button', { name: /increase quantity/i });
     const addToCartBtn = screen.getByRole('button', { name: /add to cart/i });
     
-    // Simulate user behavior: increment to 2, then click add
     await user.click(incrementBtn);
     await user.click(addToCartBtn);
     
-    // Check if our spy function was triggered with the exact values
     expect(mockAddToCart).toHaveBeenCalledWith(mockProduct, 2);
   });
   it('disables the add to cart button when quantity is 0', async () => {
@@ -54,7 +52,6 @@ describe('ProductCard Component', () => {
   const addToCartBtn = screen.getByRole('button', { name: /add to cart/i });
   const input = screen.getByRole('spinbutton');
 
-  // Start at 1, decrement once to hit 0
   await user.click(decrementBtn);
   
   expect(input.value).toBe('0');

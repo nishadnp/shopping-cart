@@ -1,7 +1,5 @@
-// src/components/ProductCard.jsx
-
 import { useState } from "react";
-import styles from "./ProductCard.module.css"; // 1. Import your styles object
+import styles from "./ProductCard.module.css";
 
 export default function ProductCard({ product, onAddToCart }) {
     const [quantity, setQuantity] = useState(1);
@@ -19,13 +17,10 @@ export default function ProductCard({ product, onAddToCart }) {
     };
 
     return (
-        // 2. Map classes using JavaScript brackets instead of raw strings, and strip inline styles
         <article className={styles.card}>
             <figure className={styles.imageContainer}>
                 <img src={product.image} alt={product.title} className={styles.image} />
             </figure>
-            
-            {/* Keeping content clean inside a native flow block */}
             <figcaption style={{ padding: '0 0.25rem' }}>
                 <h3 className={styles.title} title={product.title}>{product.title}</h3>
                 <p className={styles.price}>${product.price.toFixed(2)}</p>

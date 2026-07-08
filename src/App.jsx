@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styles from './App.module.css';
 
 function App() {
+  // Root-level cart state: shared with all route children through Outlet context.
   const [cart, setCart] = useState([]);
 
   const handleAddToCart = (product, quantity) => {
@@ -34,7 +35,6 @@ function App() {
   };
 
   return (
-    // 1. Wrap entire tree inside an appLayout wrapper to handle the sticky calculations
     <div className={styles.appLayout}>
       <header className={styles.header}>
         <nav className={styles.navContainer}>

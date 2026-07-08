@@ -1,12 +1,9 @@
-// src/pages/Home
-
 import { Link } from 'react-router-dom';
 import styles from './Home.module.css';
 
 export default function Home() {
     return (
         <>
-        {/* Hero Section */}
         <section className={styles.hero}>
             <h1>Curated Essentials, Delivered Swiftly</h1>
             <p>
@@ -17,7 +14,6 @@ export default function Home() {
             </Link>
         </section>
 
-        {/* Value Propositions Section */}
         <section>
             <h2 className={styles.sectionTitle}>Why Shop with SwiftStore?</h2>
             

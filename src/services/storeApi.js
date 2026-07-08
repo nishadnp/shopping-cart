@@ -1,5 +1,3 @@
-// src/services/storeApi.js
-
 const BASE_URL = 'https://fakestoreapi.com';
 
 export async function fetchStoreProducts(signal) {
